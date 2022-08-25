@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-
+import BottomNavigation from "./Components/BottomNavigation/BottomNavigation";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Stats from "./Components/Stats/Stats";
+import MyGarage from "./Components/Garage/Garage.jsx";
+import Navbar from "./Components/Navbar/Navbar";
+import ForMobile from "./Components/ForMobile/ForMobile.jsx";
+import { useEffect, useState } from "react";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [width, setWidth] = useState(window.innerWidth);
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+  const isMobile = width <= 768;
+
+  return isMobile ? (
+    <ForMobile />
+  ) : (
+    <BrowserRouter>
+      <>
+        <Navbar />
+        <div className="hero min-h-screen bg-base-200">
+          <div className="hero-content flex-col lg:flex-row-reverse">
+            <Stats />
+            <div>
+              <Routes>
+                <Route path="/" element={<MyGarage />} />
+                <Route path="/:page" element={<MyGarage />} />
+                <Route path="*" element={<h1>Route does not exist</h1>} />
+              </Routes>
+            </div>
+          </div>
+          <BottomNavigation />
+        </div>
+      </>
+    </BrowserRouter>
   );
 }
 
