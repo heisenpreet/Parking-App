@@ -66,7 +66,11 @@ const AddNewCar = () => {
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs input-primary"
             />
-            <br></br>
+            <label class="label">
+              <span class="label-text-alt"> </span>
+              <span class="label-text-alt opacity-80">minimum 4 letters</span>
+            </label>
+
             <label className="label">
               <span className="label-text">Number Plate:</span>
             </label>
@@ -78,7 +82,11 @@ const AddNewCar = () => {
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs input-primary"
             />
-            <br></br> <br></br>
+            <label class="label">
+              <span class="label-text-alt"> </span>
+              <span class="label-text-alt opacity-80">DL01SEM6719</span>
+            </label>
+            <br></br>
             <button
               for="my-modal-4"
               disabled={isValid}
